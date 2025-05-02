@@ -11,7 +11,7 @@ $(builddir)/%.so: $(OBJECTS:%.o=$(builddir)/$(output_name)/%.o) $(SHARED_OBJECTS
 $(builddir)/%.a: $(OBJECTS:%.o=$(builddir)/$(output_name)/%.o) $(STATIC_OBJECTS:%.o=$(builddir)/$(output_name)/%.o)
 	$(AR) rcs $@ $^
 
-$(builddir)/$(output_name)/%.o: stc/%.c $(builddir)/$(output_name)
+$(builddir)/$(output_name)/%.o: src/%.c $(builddir)/$(output_name)
 	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o$@ $<
 
 $(builddir)/$(output_name):
