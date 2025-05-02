@@ -1,5 +1,5 @@
 
-OBJECTS := 
+OBJECTS := init.o start.o at_exit.o memcpy.o
 
 TARGETS := libusi-init.a
 

@@ -1,5 +1,5 @@
 
-OBJECTS := syscall_defs.o
+OBJECTS := syscall_defs.o info.o
 
 TARGETS := 
 
