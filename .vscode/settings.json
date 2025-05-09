@@ -2,6 +2,7 @@
     "files.associations": {
         "info.h": "c",
         "syscall.h": "c",
-        "helpers.h": "c"
+        "helpers.h": "c",
+        "at_exit.h": "c"
     }
 }

@@ -9,7 +9,7 @@ stamp: $(TARGETS:%=$(builddir)/%)
 .PRECIOUS: $(builddir)/%.so $(builddir)/%.a $(builddir)/$(output_name)/%.o
 
 $(builddir)/%.so: $(OBJECTS:%.o=$(builddir)/$(output_name)/%.o) $(SHARED_OBJECTS:%.o=$(builddir)/$(output_name)/%.o)
-	$(CC) $(ALL_LDFLAGS) -shared -nodefaultlibs -o$@ $^ 
+	$(CC) $(ALL_LDFLAGS) -shared -nodefaultlibs -o$@ $^ $(LIBS)
 
 $(builddir)/%.a: $(OBJECTS:%.o=$(builddir)/$(output_name)/%.o) $(STATIC_OBJECTS:%.o=$(builddir)/$(output_name)/%.o)
 	$(AR) rcs $@ $^

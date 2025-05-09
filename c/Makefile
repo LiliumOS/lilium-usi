@@ -1,5 +1,5 @@
 
-OBJECTS := 
+OBJECTS := exit.o at_exit.o
 
 SHARED_OBJECTS := 
 STATIC_OBJECTS :=
@@ -8,7 +8,7 @@ TARGETS :=
 
 output_name := c
 
-LIBS := 
+LIBS := -lusi
 
 ifeq ($(build_shared),yes)
 	TARGETS += lib$(output_name).so

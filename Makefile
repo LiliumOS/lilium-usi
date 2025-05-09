@@ -52,7 +52,7 @@ ALL_CPPFLAGS := $(CPPFLAGS) -isystem $(srcdir)/lilium-knums/include -isystem $(s
 
 ALL_CFLAGS := $(CFLAGS) -ffreestanding -masm=intel -std=gnu11 -ftls-model=initial-exec
 
-ALL_LDFLAGS := $(LDFLAGS) -nodefaultlibs -nostartfiles
+ALL_LDFLAGS := $(LDFLAGS) -nodefaultlibs -nostartfiles -L$(builddir)/
 
 ALL_ASFLAGS := $(ASFLAGS) -msyntax=intel -mnaked-reg
 

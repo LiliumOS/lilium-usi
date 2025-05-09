@@ -1,5 +1,5 @@
 
-OBJECTS := 
+OBJECTS := loader.o
 
 TARGETS := 
 

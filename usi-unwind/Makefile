@@ -1,5 +1,5 @@
 
-OBJECTS := 
+OBJECTS := begin.o
 
 TARGETS := 
 
