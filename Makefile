@@ -95,13 +95,13 @@ clean: $(enabled_libs:%=clean-%)
 clean-%:
 	+$(MAKE) -C $* clean
 
-install-strip-%: %/stamp
+do-install-strip-%:
 	+$(MAKE) -C $* install-strip
 
-install-normal-%: %/stamp
+do-install-normal-%:
 	+$(MAKE) -C $* install
 
-install: $(enabled_libs:%=install-normal-%)
+install: $(enabled_libs:%=do-install-normal-%)
 
-install-strip: $(enabled_libs:%=install-strip-%) 
+install-strip: $(enabled_libs:%=do-install-strip-%) 
 

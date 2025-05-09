@@ -32,19 +32,20 @@ $(builddir)/$(output_name):
 clean:
 	rm -f stamp
 
-install-strip-%.a: install-%.a
 
-INSTALL_DIR ?= $(SYSROOT)/$(libdir)
+INSTALL_DIR := $(SYSROOT)$(libdir)
 
-install-%.a:
+do-install-strip-%.a: do-install-%.a
+
+do-install-%.a: $(builddir)/%.a
 	$(INSTALL) -m644 -D -t $(INSTALL_DIR) $(builddir)/$*.a
 
-install-strip-%.so:
+do-install-strip-%.so: $(builddir)/%.so
 	$(INSTALL) -m644 --strip --strip-program=$(STRIP) -D -t $(INSTALL_DIR) $(builddir)/$*.so
 
-install-%.so:
+do-install-%.so: $(builddir)/%.so
 	$(INSTALL) -m644 -D -t $(INSTALL_DIR) $(builddir)/$*.so
 
-install: $(TARGETS:%=install-%)
+install: $(TARGETS:%=do-install-%)
 
-install-strip: $(TARGETS:%=install-strip-%)
+install-strip: $(TARGETS:%=do-install-strip-%)
