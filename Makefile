@@ -71,7 +71,7 @@ ALL_LDFLAGS = $(LDFLAGS)
 
 export CC AR AS ALL_CFLAGS ALL_CPPFLAGS ALL_LDFLAGS ALL_ASFLAGS INSTALL prefix exec_prefix libdir syslibdir includedir sysconfidr sharedstatedir runstatedir localstatedir datarootdir datadir ARCH TARGET build_shared build_static SYSROOT srcdir builddir
 
-.PHONY: all install clean distclean install-strip $(enabled_libs:%=clean-%) $(enabled_libs:%=install-normal-%) $(enabled_libs:%=install-strip-%)  
+.PHONY: all install clean distclean install-strip
 
 all: stamp
 
@@ -88,7 +88,7 @@ lilium-knums/include/stamp:
 
 distclean: clean
 
-clean: $(enabled_libs:%=clean-%)
+clean: clean-usi-base clean-usi-thread clean-usi-io clean-usi-process clean-usi-debug clean-usi-kmgmt clean-c clean-dl clean-usi-unwind clean-usi-rtld clean-usi-init
 	rm -f stamp
 	rm -rf build/
 

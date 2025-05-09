@@ -14,3 +14,4 @@ _start:
     call qword ptr [__usi_setup_prg@GOTPCREL+rip]
     2:
     ud2
+    
