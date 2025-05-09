@@ -42,7 +42,7 @@ LN_S = ln -s
 
 enabled_subsystems = base thread io process debug kmgmt
 
-enabled_libs = $(enabled_subsystems:%=usi-%) c usi-unwind dl usi-rtld usi-init
+enabled_libs = $(enabled_subsystems:%=usi-%) c usi-unwind dl usi-rtld usi-init usi
 
 
 ## Build Configuration 

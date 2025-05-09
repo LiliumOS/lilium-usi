@@ -3,7 +3,7 @@ OBJECTS := loader.o
 
 TARGETS := 
 
-output_name := usi
+output_name := usi-rtld
 
 LIBS := 
 

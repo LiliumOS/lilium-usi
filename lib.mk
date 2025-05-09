@@ -33,7 +33,7 @@ clean:
 	rm -f stamp
 
 
-INSTALL_DIR := $(SYSROOT)$(libdir)
+INSTALL_DIR ?= $(SYSROOT)$(libdir)
 
 do-install-strip-%.a: do-install-%.a
 
