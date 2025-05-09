@@ -80,7 +80,7 @@ stamp: $(enabled_libs:%=%/stamp) lilium-knums/include/stamp
 
 include $(enabled_libs:%=%/build.d)
 
-$(enabled_libs:%=%/stamp): %/stamp: %/Makefile lib.mk
+$(enabled_libs:%=%/stamp): %/stamp: %/Makefile lib.mk lilium-knums/include/stamp
 	+$(MAKE) -C $* stamp
 
 lilium-knums/include/stamp:
