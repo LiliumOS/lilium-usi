@@ -22,10 +22,10 @@ endif
 stamp: $(TARGETS:%=$(builddir)/%)
 
 $(builddir)/libusi.so:
-	echo 'INPUT(AS_NEEDED(libusi-base.so libusi-thread.so libusi-io.so libusi-process.so libusi-debug.so libusi-kmgmt.so libusi-unwind.so libusi-rtld.so))' > $@
+	echo 'INPUT(AS_NEEDED(=$(libdir)/libusi-base.so =$(libdir)/libusi-thread.so =$(libdir)/libusi-io.so =$(libdir)/libusi-process.so =$(libdir)/libusi-debug.so =$(libdir)/libusi-kmgmt.so =$(libdir)/libusi-unwind.so =$(libdir)/libusi-rtld.so))' > $@
 
 $(builddir)/libusi.a:
-	echo 'INPUT(libusi-base.a libusi-thread.a libusi-io.a libusi-process.a libusi-debug.a libusi-kmgmt.a libusi-unwind.a)' > $@
+	echo 'INPUT(=$(libdir)/libusi-base.a =$(libdir)/libusi-thread.a =$(libdir)/libusi-io.a =$(libdir)/libusi-process.a =$(libdir)/libusi-debug.a =$(libdir)/libusi-kmgmt.a =$(libdir)/libusi-unwind.a)' > $@
 
 clean:
 	rm -f stamp

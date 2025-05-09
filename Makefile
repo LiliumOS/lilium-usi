@@ -17,10 +17,6 @@ runstatedir = $(localstatedir)/run
 datarootdir = $(prefix)/usr
 datadir = $(datarootdir)
 
-ARCH = x86_64
-
-TARGET = $(ARCH)-lilium-std
-
 SYSROOT = 
 
 
@@ -31,6 +27,9 @@ CFLAGS = -O2 -g
 LDFLAGS = 
 CPPFLAGS = 
 ASFLAGS = 
+
+ARCH = x86_64
+TARGET = $(ARCH)-lilium-std
 
 CC = $(TARGET)-cc
 AR = $(TARGET)-ar
