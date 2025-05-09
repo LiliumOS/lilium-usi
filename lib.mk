@@ -4,6 +4,8 @@ all: stamp
 stamp: $(TARGETS:%=$(builddir)/%)
 	touch stamp
 
+.PHONY: all clean $(TARGETS:%=install-strip-%) $(TARGETS:%=install-%) install install-strip
+
 .PRECIOUS: $(builddir)/%.so $(builddir)/%.a $(builddir)/$(output_name)/%.o
 
 $(builddir)/%.so: $(OBJECTS:%.o=$(builddir)/$(output_name)/%.o) $(SHARED_OBJECTS:%.o=$(builddir)/$(output_name)/%.o)
@@ -29,3 +31,20 @@ $(builddir)/$(output_name):
 
 clean:
 	rm -f stamp
+
+install-strip-%.a: install-%.a
+
+INSTALL_DIR ?= $(SYSROOT)/$(libdir)
+
+install-%.a:
+	$(INSTALL) -m644 -D -t $(INSTALL_DIR) $(builddir)/$*.a
+
+install-strip-%.so:
+	$(INSTALL) -m644 --strip --strip-program=$(STRIP) -D -t $(INSTALL_DIR) $(builddir)/$*.so
+
+install-%.so:
+	$(INSTALL) -m644 -D -t $(INSTALL_DIR) $(builddir)/$*.so
+
+install: $(TARGETS:%=install-%)
+
+install-strip: $(TARGETS:%=install-strip-%)

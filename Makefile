@@ -71,7 +71,7 @@ ALL_LDFLAGS = $(LDFLAGS)
 
 export CC AR AS ALL_CFLAGS ALL_CPPFLAGS ALL_LDFLAGS ALL_ASFLAGS INSTALL prefix exec_prefix libdir syslibdir includedir sysconfidr sharedstatedir runstatedir localstatedir datarootdir datadir ARCH TARGET build_shared build_static SYSROOT srcdir builddir
 
-.PHONY: all install clean distclean install-strip $(enabled_libs:%-clean-%) 
+.PHONY: all install clean distclean install-strip $(enabled_libs:%=clean-%) $(enabled_libs:%=install-normal-%) $(enabled_libs:%=install-strip-%)  
 
 all: stamp
 
@@ -94,4 +94,14 @@ clean: $(enabled_libs:%=clean-%)
 
 clean-%:
 	+$(MAKE) -C $* clean
-	
+
+install-strip-%: %/stamp
+	+$(MAKE) -C $* install-strip
+
+install-normal-%: %/stamp
+	+$(MAKE) -C $* install
+
+install: $(enabled_libs:%=install-normal-%)
+
+install-strip: $(enabled_libs:%=install-strip-%) 
+
