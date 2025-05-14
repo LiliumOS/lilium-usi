@@ -100,7 +100,11 @@ do-install-strip-%:
 do-install-normal-%:
 	+$(MAKE) -C $* install
 
-install: $(enabled_libs:%=do-install-normal-%)
+do-install-include: lilium-knums/include/stamp
+	cd include/ && find . \( -name '*.h' -o -name '*.hpp' -o -name '*.hxx' \) -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
+	cd lilium-knums/include/ && find . -name '*.h' -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
+
+install: $(enabled_libs:%=do-install-normal-%) do-install-include
 
 install-strip: $(enabled_libs:%=do-install-strip-%) 
 
