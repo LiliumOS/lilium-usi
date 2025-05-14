@@ -5,10 +5,11 @@
 #include <at_exit.h>
 #include <lilium-sci/syscall.h>
 #include <syscall.h>
+#include <io-handles.h>
 
-_Thread_local Handle* __handle __STDIN_HANDLE __attribute__((tls_model("initial-exec")));
-_Thread_local Handle* __handle __STDOUT_HANDLE __attribute__((tls_model("initial-exec")));
-_Thread_local Handle* __handle __STDERR_HANDLE __attribute__((tls_model("initial-exec")));
+_Thread_local IOHandle* __handle __HANDLE_IO_STDIN __attribute__((tls_model("initial-exec")));
+_Thread_local IOHandle* __handle __HANDLE_IO_STDOUT __attribute__((tls_model("initial-exec")));
+_Thread_local IOHandle* __handle __HANDLE_IO_STDERR __attribute__((tls_model("initial-exec")));
 
 _Thread_local struct {
     Handle* __handle * __arr;
@@ -32,13 +33,13 @@ _Noreturn void __usi_setup_prg(long argc, char** argv, char** envp, struct __Elf
     }
 
     if(__builtin_expect(__init_handles.__len >= 1, 1)) {
-        __STDIN_HANDLE = __init_handles.__arr[0];
+        __HANDLE_IO_STDIN = (IOHandle*)__init_handles.__arr[0];
     }
     if(__builtin_expect(__init_handles.__len >= 2, 1)) {
-        __STDOUT_HANDLE = __init_handles.__arr[1];
+        __HANDLE_IO_STDOUT = (IOHandle*)__init_handles.__arr[1];
     }
     if(__builtin_expect(__init_handles.__len >= 3, 1)) {
-        __STDERR_HANDLE = __init_handles.__arr[2];
+        __HANDLE_IO_STDERR = (IOHandle*)__init_handles.__arr[2];
     }
 
     int res = main(argc, argv, envp);
