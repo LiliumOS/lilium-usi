@@ -46,6 +46,10 @@ int __cxa_at_exit(void (*func)(void*), void* udata, void* dso) {
     return 0;
 }
 
+int atexit(void(*func)(void)) {
+    __cxa_at_exit((void(*)(void*))func, NULL, NULL);
+} 
+
 void __cxa_finalize(void* dso) {
     while(atomic_exchange_explicit(&__cxa_at_exit_lock, 1, memory_order_acquire) != 0){
          __builtin_ia32_pause(); // TODO: Something more efficient than a spinlock

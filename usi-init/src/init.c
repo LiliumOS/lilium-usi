@@ -27,9 +27,9 @@ _Noreturn void __usi_setup_prg(long argc, char** argv, char** envp, struct __Elf
             __auxv[auxv->__aux_type-2] = auxv->__aux_val;
     }
 
-    if(__builtin_expect(__auxv[AT_LILIUM_INIT_HANDLES].__aux_ptr != NULL, 1)){
-        __init_handles.__arr = __auxv[AT_LILIUM_INIT_HANDLES].__aux_ptr;
-        __init_handles.__len = __auxv[AT_LILIUM_INIT_HANDLES_LEN].__aux_val;
+    if(__builtin_expect(__auxv[AT_LILIUM_INIT_HANDLES - 2].__aux_ptr != NULL, 1)){
+        __init_handles.__arr = __auxv[AT_LILIUM_INIT_HANDLES - 2].__aux_ptr;
+        __init_handles.__len = __auxv[AT_LILIUM_INIT_HANDLES_LEN - 2].__aux_val;
     }
 
     if(__builtin_expect(__init_handles.__len >= 1, 1)) {
