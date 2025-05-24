@@ -3,6 +3,7 @@
 #include <lilium-sci/types/uuid.h>
 #include <lilium-sci/types/int.h>
 #include <lilium-sci/types/str.h>
+#include <lilium-sci/types/slice.h>
 #include <lilium-sci/syscall.h>
 
 #define UUID_EQ(a, b) ({                                  \
@@ -33,3 +34,6 @@
     __ptr->len = sizeof(__val);\
     __res;\
 })
+
+#define CSLICE_EMPTY(__TY) ((KCSlice){.buf_ptr = (void*)(_Alignof(__TY)), .len = 0})
+#define CSTR_EMPTY ((KStrCPtr){.str_ptr = (void*)1, .len = 0})
