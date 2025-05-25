@@ -555,7 +555,7 @@ void* __usi_malloc_map(size_t __size);
 #define public_fREe      free
 #define public_cFREe     cfree
 #define public_mALLOc    malloc
-#define public_mEMALIGn  memalign
+#define public_mEMALIGn  aligned_alloc
 #define public_rEALLOc   realloc
 #define public_vALLOc    valloc
 #define public_pVALLOc   pvalloc
