@@ -22,10 +22,10 @@ endif
 stamp: $(TARGETS:%=$(builddir)/%)
 
 $(builddir)/libusi.so:
-	echo 'INPUT(AS_NEEDED(=$(libdir)/libusi-base.so =$(libdir)/libusi-thread.so =$(libdir)/libusi-io.so =$(libdir)/libusi-process.so =$(libdir)/libusi-debug.so =$(libdir)/libusi-kmgmt.so =$(libdir)/libusi-unwind.so =$(libdir)/libusi-rtld.so))' > $@
+	echo 'INPUT(AS_NEEDED(=$(libdir)/libusi-base.so =$(libdir)/libusi-thread.so =$(libdir)/libusi-io.so =$(libdir)/libusi-process.so =$(libdir)/libusi-debug.so =$(libdir)/libusi-kmgmt.so =$(libdir)/libusi-unwind.so =$(libdir)/libusi-rtld.so =$(libdir)/libusi-support.so))' > $@
 
 $(builddir)/libusi.a:
-	echo 'INPUT(=$(libdir)/libusi-base.a =$(libdir)/libusi-thread.a =$(libdir)/libusi-io.a =$(libdir)/libusi-process.a =$(libdir)/libusi-debug.a =$(libdir)/libusi-kmgmt.a =$(libdir)/libusi-unwind.a)' > $@
+	echo 'INPUT(=$(libdir)/libusi-base.a =$(libdir)/libusi-thread.a =$(libdir)/libusi-io.a =$(libdir)/libusi-process.a =$(libdir)/libusi-debug.a =$(libdir)/libusi-kmgmt.a =$(libdir)/libusi-unwind.a =$(libdir)/libusi-support.a)' > $@
 
 clean:
 	rm -f stamp

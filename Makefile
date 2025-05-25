@@ -41,7 +41,7 @@ LN_S = ln -s
 
 enabled_subsystems = base thread io process debug kmgmt
 
-enabled_libs = $(enabled_subsystems:%=usi-%) c usi-unwind dl usi-rtld usi-init usi
+enabled_libs = $(enabled_subsystems:%=usi-%) c usi-unwind dl usi-rtld usi-init usi-support usi
 
 
 ## Build Configuration 
@@ -61,8 +61,6 @@ ifeq ($(build_shared),yes)
 else
 	ALL_CFLAGS += -fPIE
 endif
-
-ALL_LDFLAGS = $(LDFLAGS)
 
 
 ## Build Rules

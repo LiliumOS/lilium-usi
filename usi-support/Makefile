@@ -1,14 +1,11 @@
 
-OBJECTS := exit.o at_exit.o ctype.o div.o malloc.o malloc-helpers.o
-
-SHARED_OBJECTS := 
-STATIC_OBJECTS :=
+OBJECTS := memcpy.o
 
 TARGETS := 
 
-output_name := c
+output_name := usi-support
 
-LIBS := -lusi -lusi-support
+LIBS := 
 
 ifeq ($(build_shared),yes)
 	TARGETS += lib$(output_name).so
