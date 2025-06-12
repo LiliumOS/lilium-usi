@@ -678,7 +678,7 @@ Void_t* memcpy();
   a hand-crafted MORECORE function that cannot handle negative arguments.
 */
 
-/* #define MORECORE_CANNOT_TRIM */
+#define MORECORE_CANNOT_TRIM
 
 
 /*

@@ -20,7 +20,7 @@ union __aux_val __auxv[126];
 
 _Noreturn void __usi_setup_prg(long argc, char** argv, char** envp, struct __Elf_AuxEnt* auxv, int (main)(int, char**, char**), void (*fini)()) {
     if(__builtin_expect(__cxa_at_exit != NULL, 1))
-        __cxa_at_exit(fini, NULL,NULL);
+        __cxa_at_exit((__cxa_at_exit_func)fini, NULL,NULL);
     
     for(;auxv->__aux_type;auxv++){
         if(auxv->__aux_type!=1)

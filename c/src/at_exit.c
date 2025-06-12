@@ -2,6 +2,7 @@
 #include <lilium-sci/types/int.h>
 #include <stdatomic.h>
 #include <helpers.h>
+#include <at_exit.h>
 
 #define __AT_EXIT_BLOCK_COUNT (32)
 
@@ -47,7 +48,7 @@ int __cxa_at_exit(void (*func)(void*), void* udata, void* dso) {
 }
 
 int atexit(void(*func)(void)) {
-    __cxa_at_exit((void(*)(void*))func, NULL, NULL);
+    __cxa_at_exit((__cxa_at_exit_func)func, NULL, NULL);
 } 
 
 void __cxa_finalize(void* dso) {

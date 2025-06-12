@@ -24,6 +24,7 @@ build_shared = yes
 build_static = yes
 
 CFLAGS = -O2 -g
+CXXFLAGS = -O2 -g
 LDFLAGS = 
 CPPFLAGS = 
 ASFLAGS = 
@@ -32,6 +33,7 @@ ARCH = x86_64
 TARGET = $(ARCH)-lilium-std
 
 CC = $(TARGET)-cc
+CXX = $(TARGET)-c++
 AR = $(TARGET)-ar
 AS = $(TARGET)-as
 
@@ -49,7 +51,9 @@ enabled_libs = $(enabled_subsystems:%=usi-%) c usi-unwind dl usi-rtld usi-init u
 
 ALL_CPPFLAGS := $(CPPFLAGS) -isystem $(srcdir)/lilium-knums/include -isystem $(srcdir)/include -I$(srcdir)/include-local -nostdinc
 
-ALL_CFLAGS := $(CFLAGS) -ffreestanding -masm=intel -std=gnu11 -ftls-model=initial-exec
+ALL_CFLAGS := $(CFLAGS) -ffreestanding -masm=intel -std=gnu23 -ftls-model=initial-exec
+
+ALL_CXXFLAGS := $(CXXFLAGS) -ffrestanding -masm=intel -std=gnu++23 -ftls-model=initial-exec
 
 ALL_LDFLAGS := $(LDFLAGS) -nodefaultlibs -nostartfiles -L$(builddir)/
 
@@ -57,16 +61,18 @@ ALL_ASFLAGS := $(ASFLAGS) -msyntax=intel -mnaked-reg
 
 ifeq ($(build_shared),yes)
 	ALL_CFLAGS += -fPIC
+	ALL_CXXFLAGS += -fPIC
 	ALL_ASFLAGS += -mshared
 else
 	ALL_CFLAGS += -fPIE
+	ALL_CXXFLAGS += -fPIE
 endif
 
 
 ## Build Rules
 # Do not Edit below this line
 
-export CC AR AS ALL_CFLAGS ALL_CPPFLAGS ALL_LDFLAGS ALL_ASFLAGS INSTALL prefix exec_prefix libdir syslibdir includedir sysconfidr sharedstatedir runstatedir localstatedir datarootdir datadir ARCH TARGET build_shared build_static SYSROOT srcdir builddir
+export CC CXX AR AS ALL_CFLAGS ALL_CXXFLAGS ALL_CPPFLAGS ALL_LDFLAGS ALL_ASFLAGS INSTALL prefix exec_prefix libdir syslibdir includedir sysconfidr sharedstatedir runstatedir localstatedir datarootdir datadir ARCH TARGET build_shared build_static SYSROOT srcdir builddir
 
 .PHONY: all install clean distclean install-strip
 

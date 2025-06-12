@@ -17,13 +17,25 @@ $(builddir)/%.a: $(OBJECTS:%.o=$(builddir)/$(output_name)/%.o) $(STATIC_OBJECTS:
 $(builddir)/$(output_name)/%.o: src/%.c $(builddir)/$(output_name)
 	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o$@ $<
 
-$(builddir)/$(output_name)/%.o: src/%.s $(builddir)/$(output_name)
-	$(AS) $(ALL_ASFLAGS) -o$@ $<
+$(builddir)/$(output_name)/%.o: src/%.cxx $(builddir)/$(output_name)
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -c -o$@ $<
 
 $(builddir)/$(output_name)/%.o: src/$(ARCH)/%.c $(builddir)/$(output_name)
 	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o$@ $<
 
+$(builddir)/$(output_name)/%.o: src/$(ARCH)/%.cxx $(builddir)/$(output_name)
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -c -o$@ $<
+
 $(builddir)/$(output_name)/%.o: src/$(ARCH)/%.s $(builddir)/$(output_name)
+	$(AS) $(ALL_ASFLAGS) -o$@ $<
+
+$(builddir)/$(output_name)/%.o: src/generic/%.c $(builddir)/$(output_name)
+	$(CC) $(ALL_CPPFLAGS) $(ALL_CFLAGS) -c -o$@ $<
+
+$(builddir)/$(output_name)/%.o: src/generic/%.cxx $(builddir)/$(output_name)
+	$(CXX) $(ALL_CPPFLAGS) $(ALL_CXXFLAGS) -c -o$@ $<
+
+$(builddir)/$(output_name)/%.o: src/generic/%.s $(builddir)/$(output_name)
 	$(AS) $(ALL_ASFLAGS) -o$@ $<
 
 $(builddir)/$(output_name):

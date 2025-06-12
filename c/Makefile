@@ -1,5 +1,5 @@
 
-OBJECTS := exit.o at_exit.o ctype.o div.o malloc.o malloc-helpers.o
+OBJECTS := exit.o at_exit.o ctype.o div.o malloc.o malloc-helpers.o sqrt.o sqrtf.o sqrtld.o
 
 SHARED_OBJECTS := 
 STATIC_OBJECTS :=
