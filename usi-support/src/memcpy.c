@@ -28,3 +28,13 @@ int memcmp(const void* __a, const void* __b, unsigned long len){
     }
     return 0;
 }
+
+const void* memchr(const void* __mem, int __ch, unsigned long __len) {
+    const char* __mem_end = ((const char*)__mem)+__len;
+
+    for(const char* __mem_ptr = (const char*) __mem; __mem_ptr != __mem_end; __mem_ptr++) {
+        if ((*__mem_ptr)==__ch)
+            return __mem_ptr;
+    }
+    return 0;
+}
