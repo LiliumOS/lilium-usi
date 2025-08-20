@@ -63,6 +63,11 @@ ifeq ($(build_shared),yes)
 	ALL_CFLAGS += -fPIC
 	ALL_CXXFLAGS += -fPIC
 	ALL_ASFLAGS += -mshared
+else ifeq($(build_static), pic)
+	override build_static := yes
+	ALL_CFLAGS += -fPIC
+	ALL_CXXFLAGS += -fPIC
+	ALL_ASFLAGS += -mshared
 else
 	ALL_CFLAGS += -fPIE
 	ALL_CXXFLAGS += -fPIE
