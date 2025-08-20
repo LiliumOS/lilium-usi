@@ -58,3 +58,32 @@ All of the variables above can be set when building for makefile, and additional
 * `--enable-shared`/`--disable-shared` controls whether or not shared libraries and dynamic linking support should be built by default
 * `--enable-static`/`--disabale-static` controls whether or not static libraries should be built by default:
     `--enable-static=pic` causes static libraries to be built with PIC enabled, even if shared libraries are disabled
+
+
+## License
+
+Copyright (C) 2025 Lilium Mantainers
+
+This software is dual licensed under the terms of the [MIT](LICENSE-MIT) and [Apache 2.0](LICENSE-APACHE) Licenses. 
+You may use this software under the terms of the either License, at your option.
+
+Unless you state otherwise, if you intentionally submit any contribution subject to copyright for inclusion in this repository, you agree to allow the mantainers to release that contribution under the above dual license, and with the following Public API Notice.
+
+## LiliumOS Public API notice
+
+Note: The below does not apply to any public API which is defined by a standard authored by a 3rd party.
+
+It is believed by the authors of this software that the Public API exposed by this software and which are intended to be useful to programs written and built against this software are not subject to copyright. In the event this assessment is wrong, the authors disclaim all copyright, to the greatest extent allowed by law, to the Public API and, to the extent that such copyright cannot be disclaimed, the Public API portions of this software are released under the following license, which you may use for those portions alone instead of the License for the software as a whole:
+> Permission to use, copy, modify, and/or distribute this software for
+any purpose with or without fee is hereby granted.
+> THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
+WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
+OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
+FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
+DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
+AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+The Public API of a library includes the names and types of functions, structure fields, macros, and other definitions that are intended to be exposed publically, but does not include any intentionally private definitions (such as those in `bits/` headers or most things prefixed with a reserved identifier that are not documented publically) or the source code used to provide the functionality of those interfaces.
+
+The Above Notice shall not be taken to provide any license to any patent, whether or not held by the authors, that may apply to the Public API or to the implementation, including such parts of the implementation that are necessary to provide the functionality of the Public API.
