@@ -1,2 +1,2 @@
 
-ldso/stamp: lilium-knums/include/stamp
+ldso/stamp:

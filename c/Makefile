@@ -1,5 +1,7 @@
 
-OBJECTS := exit.o at_exit.o ctype.o div.o malloc.o malloc-helpers.o sqrt.o sqrtf.o sqrtld.o
+OBJECTS := exit.o at_exit.o ctype.o div.o malloc.o malloc-helpers.o sqrt.o sqrtf.o sqrtld.o fenv.o
+
+include src/$(ARCH)/defs.mk
 
 SHARED_OBJECTS := 
 STATIC_OBJECTS :=

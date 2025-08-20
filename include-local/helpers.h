@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 #include <lilium-sci/types/uuid.h>
 #include <lilium-sci/types/int.h>
 #include <lilium-sci/types/str.h>
@@ -20,7 +22,6 @@
 
 #define STRINGIFY(...) __STRINGIFY0(__VA_ARGS__)
 
-#define NULL ((void*)0)
 
 
 #define TRY_FILL_STR_CONST(ptr, val) ({\

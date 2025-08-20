@@ -1,12 +1,13 @@
 #ifndef __LILIUM_USI_CTYPE_H_2025_05_23_00_12_43
 #define __LILIUM_USI_CTYPE_H_2025_05_23_00_12_43
 
+#include <bits/lang-version.h>
+
 #ifdef __LILIUM_USI_IMPL_CTYPE_H
 #define __LILIUM_USI_INLINE_DEFS
 #endif
 
 #include <bits/inline.h>
-#include <bits/lang-version.h>
 
 #undef __LILIUM_USI_INLINE_DEFS
 

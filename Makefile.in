@@ -1,0 +1,124 @@
+
+## Variables from autotools
+# Add or remove substituted variables only
+srcdir ::= @abs_top_srcdir@
+builddir ::= @abs_top_builddir@
+
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+libdir = @libdir@
+includedir = @includedir@
+syslibdir = /lib
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+runstatedir = @runstatedir@
+datarootdir = @datarootdir@
+datadir = @datadir@
+
+SYSROOT = @SYSROOT@
+
+
+build_shared = @enable_shared@
+build_static = @enable_static@
+
+CFLAGS = @CFLAGS@
+CXXFLAGS = @CXXFLAGS@
+LDFLAGS = @LDFLAGS@
+CPPFLAGS = @CPPFLAGS@
+ASFLAGS = @ASFLAGS@
+
+ARCH = @host_cpu@
+TARGET = @host@
+
+CC = @CC@
+CXX = @CXX@
+AR = @AR@
+AS = @AS@
+
+INSTALL = @INSTALL@
+MKDIR_P = @MKDIR_P@
+LN_S = @LN_S@
+
+enabled_subsystems = @enabled_subsystems@
+
+enabled_libs = $(enabled_subsystems:%=usi-%) @enabled_libraries@
+
+
+## Build Configuration 
+# 
+
+ALL_CPPFLAGS := $(CPPFLAGS) -isystem $(srcdir)/lilium-knums/include -isystem $(srcdir)/include -isystem $(srcdir)/arch-include/$(ARCH) -I$(srcdir)/include-local -nostdinc
+
+ALL_CFLAGS := $(CFLAGS) -Wno-overflow -ffreestanding -masm=intel -std=gnu23 -ftls-model=initial-exec
+
+ALL_CXXFLAGS := $(CXXFLAGS) -Wno-ovverflow -ffrestanding -masm=intel -std=gnu++23 -ftls-model=initial-exec
+
+ALL_LDFLAGS := $(LDFLAGS) -nodefaultlibs -nostartfiles -L$(builddir)/
+
+ALL_ASFLAGS := $(ASFLAGS) -msyntax=intel -mnaked-reg
+
+ifeq ($(build_shared),yes)
+	ALL_CFLAGS += -fPIC
+	ALL_CXXFLAGS += -fPIC
+	ALL_ASFLAGS += -mshared
+else
+	ALL_CFLAGS += -fPIE
+	ALL_CXXFLAGS += -fPIE
+endif
+
+
+## Build Rules
+# Do not Edit below this line
+
+export CC CXX AR AS ALL_CFLAGS ALL_CXXFLAGS ALL_CPPFLAGS ALL_LDFLAGS ALL_ASFLAGS INSTALL prefix exec_prefix libdir syslibdir includedir sysconfidr sharedstatedir runstatedir localstatedir datarootdir datadir ARCH TARGET build_shared build_static SYSROOT srcdir builddir
+
+.PHONY: all install clean distclean install-strip
+
+all: stamp
+
+Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
+	$(builddir)/config.status Makefile
+
+$(builddir)/config.status: $(srcdir)/configure
+	$(builddir)/config.status --recheck
+
+stamp: Makefile $(enabled_libs:%=%/stamp) $(srcdir)/lilium-knums/include/stamp
+	touch stamp
+
+include $(enabled_libs:%=$(srcdir)/%/build.d)
+
+$(enabled_libs:%=%/stamp): %/stamp: $(srcdir)/%/Makefile $(srcdir)/lib.mk $(srcdir)/lilium-knums/include/stamp %/ Makefile
+	+$(MAKE) -C $(srcdir)/$*
+
+$(enabled_libs:%=%/): %/:
+	$(MKDIR_P) $*/
+
+$(srcdir)/lilium-knums/include/stamp:
+	+$(MAKE) -C $(srcdir)/lilium-knums include/stamp
+
+distclean:
+	rm -rf *
+
+clean: clean-usi-base clean-usi-thread clean-usi-io clean-usi-process clean-usi-debug clean-usi-kmgmt clean-c clean-dl clean-usi-unwind clean-usi-rtld clean-usi-init
+	rm -f stamp
+
+clean-%:
+	+$(MAKE) -C $(srcdir)/$* clean
+
+do-install-strip-%:
+	+$(MAKE) -C $(srcdir)/$* install-strip
+
+do-install-normal-%:
+	+$(MAKE) -C $(srcdir)/$* install
+
+do-install-include: $(srcdir)/lilium-knums/include/stamp
+	cd $(srcdir)/include/ && find . \( -name '*.h' -o -name '*.hpp' -o -name '*.hxx' \) -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
+	cd $(srcdir)/arch-include/$(ARCH)/ && find . \( -name '*.h' -o -name '*.hpp' -o -name '*.hxx' \) -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
+	cd $(srcdir)/lilium-knums/include/ && find . -name '*.h' -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
+
+install: $(enabled_libs:%=do-install-normal-%) do-install-include
+
+install-strip: $(enabled_libs:%=do-install-strip-%) 
+

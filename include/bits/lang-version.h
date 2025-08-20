@@ -8,16 +8,18 @@
 #define __USE_CXX20 (__cplusplus >= 202002L)
 #define __USE_CXX23 (__cplusplus >= 202302L)
 
-#define __USE_C95 (__STDC__)
-#define __USE_C99 (__STDC__)
+#define __USE_C95 (defined(__STDC__))
+#define __USE_C99 (defined(__STDC__))
 #define __USE_C11 (__STDC_VERSION__ >= 201112L)
 #define __USE_C17 (__STDC_VERSION__ >= 201710L)
 #define __USE_C23 (__STDC_VERSION__ >= 202311L)
 
 #ifdef __cplusplus
-#define __LILIUM_USI_BEGIN_CDECLS extern "C" {
+#define __LILIUM_USI_BEGIN_CDECLS \
+    extern "C"                    \
+    {
 #define __LILIUM_USI_END_CDECLS }
-#else 
+#else
 #define __LILIUM_USI_BEGIN_CDECLS
 #define __LILIUM_USI_END_CDECLS
 #endif
@@ -45,7 +47,5 @@
 #else
 #define __LILIUM_USI_CONSTEXPR_CXX23
 #endif
-
-
 
 #endif /* __LILIUM_USI_BITS_LANG_VERSION_H_205_05_19_02_40_10 */

@@ -1,5 +1,5 @@
 
-OBJECTS := memcpy.o string.o
+OBJECTS := memcpy.o string.o ioh.o
 
 TARGETS := 
 

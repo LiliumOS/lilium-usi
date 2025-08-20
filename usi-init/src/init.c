@@ -7,9 +7,9 @@
 #include <syscall.h>
 #include <io-handles.h>
 
-_Thread_local IOHandle* __handle __HANDLE_IO_STDIN __attribute__((tls_model("initial-exec")));
-_Thread_local IOHandle* __handle __HANDLE_IO_STDOUT __attribute__((tls_model("initial-exec")));
-_Thread_local IOHandle* __handle __HANDLE_IO_STDERR __attribute__((tls_model("initial-exec")));
+extern _Thread_local IOHandle* __handle __HANDLE_IO_STDIN __attribute__((tls_model("initial-exec")));
+extern _Thread_local IOHandle* __handle __HANDLE_IO_STDOUT __attribute__((tls_model("initial-exec")));
+extern _Thread_local IOHandle* __handle __HANDLE_IO_STDERR __attribute__((tls_model("initial-exec")));
 
 _Thread_local struct {
     Handle* __handle * __arr;
@@ -18,7 +18,7 @@ _Thread_local struct {
 
 union __aux_val __auxv[126];
 
-_Noreturn void __usi_setup_prg(long argc, char** argv, char** envp, struct __Elf_AuxEnt* auxv, int (main)(int, char**, char**), void (*fini)()) {
+_Noreturn void __usi_setup_prg(long argc, char** argv, char** envp, struct __Elf_AuxEnt* auxv, int (main)(long, char**, char**), void (*fini)()) {
     if(__builtin_expect(__cxa_at_exit != NULL, 1))
         __cxa_at_exit((__cxa_at_exit_func)fini, NULL,NULL);
     

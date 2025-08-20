@@ -1,2 +1,2 @@
 
-usi-rtld/stamp: lilium-knums/include/stamp
+usi-rtld/stamp:

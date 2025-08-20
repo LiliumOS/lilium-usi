@@ -1,2 +1,2 @@
 
-usi-init/stamp: lilium-knums/include/stamp
+usi-init/stamp: 

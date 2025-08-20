@@ -1,8 +1,8 @@
 ## Build Defs
 # Do not edit below this line
-all: stamp
-stamp: $(TARGETS:%=$(builddir)/%)
-	touch stamp
+all: $(builddir)/$(output_name)/stamp
+$(builddir)/$(output_name)/stamp: $(TARGETS:%=$(builddir)/%) $(builddir)/$(output_name)
+	touch $(builddir)/$(output_name)/stamp
 
 .PHONY: all clean $(TARGETS:%=install-strip-%) $(TARGETS:%=install-%) install install-strip
 
@@ -42,7 +42,9 @@ $(builddir)/$(output_name):
 	mkdir -p $@
 
 clean:
-	rm -f stamp
+	rm -f $(builddir)/$(output_name)/stamp
+	rm -f $(builddir)/$(output_name)/*.o
+	rm -f $(TARGETS:%=$(builddir)/%)
 
 
 INSTALL_DIR ?= $(SYSROOT)$(libdir)

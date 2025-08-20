@@ -49,11 +49,11 @@ enabled_libs = $(enabled_subsystems:%=usi-%) c usi-unwind dl usi-rtld usi-init u
 ## Build Configuration 
 # 
 
-ALL_CPPFLAGS := $(CPPFLAGS) -isystem $(srcdir)/lilium-knums/include -isystem $(srcdir)/include -I$(srcdir)/include-local -nostdinc
+ALL_CPPFLAGS := $(CPPFLAGS) -isystem $(srcdir)/lilium-knums/include -isystem $(srcdir)/include -isystem $(srcdir)/arch-include/$(ARCH) -I$(srcdir)/include-local -nostdinc
 
-ALL_CFLAGS := $(CFLAGS) -ffreestanding -masm=intel -std=gnu23 -ftls-model=initial-exec
+ALL_CFLAGS := $(CFLAGS) -Wno-overflow -ffreestanding -masm=intel -std=gnu23 -ftls-model=initial-exec
 
-ALL_CXXFLAGS := $(CXXFLAGS) -ffrestanding -masm=intel -std=gnu++23 -ftls-model=initial-exec
+ALL_CXXFLAGS := $(CXXFLAGS) -Wno-ovverflow -ffrestanding -masm=intel -std=gnu++23 -ftls-model=initial-exec
 
 ALL_LDFLAGS := $(LDFLAGS) -nodefaultlibs -nostartfiles -L$(builddir)/
 
@@ -106,6 +106,7 @@ do-install-normal-%:
 
 do-install-include: lilium-knums/include/stamp
 	cd include/ && find . \( -name '*.h' -o -name '*.hpp' -o -name '*.hxx' \) -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
+	cd arch-include/$(ARCH)/ && find . \( -name '*.h' -o -name '*.hpp' -o -name '*.hxx' \) -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
 	cd lilium-knums/include/ && find . -name '*.h' -exec $(INSTALL) -Dm755 {} $(SYSROOT)$(includedir)/{} \;
 
 install: $(enabled_libs:%=do-install-normal-%) do-install-include
