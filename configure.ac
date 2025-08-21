@@ -21,8 +21,16 @@ case ["$host_os"] in
 esac
 
 
-AC_PROG_CC
-AC_PROG_CXX
+AC_ARG_VAR([CC])
+AC_ARG_VAR([CXX])
+
+AC_ARG_VAR([CFLAGS])
+AC_ARG_VAR([CXXFLAGS])
+AC_ARG_VAR([CPPFLAGS])
+AC_ARG_VAR([LDFLAGS])
+
+AC_PATH_TOOL([CC], [cc])
+AC_PATH_TOOL([CXX], [c++])
 
 AC_ARG_VAR([AS])
 AC_ARG_VAR([ASFLAGS])
@@ -33,7 +41,11 @@ then
     AC_MSG_FAILURE([Could not find assembler for $host. Set AS to the assembler to use, or add $host-as to PATH])
 fi
 
+AC_SUBST([CPPFLAGS])
+AC_SUBST([CFLAGS])
+AC_SUBST([CXXFLAGS])
 AC_SUBST([ASFLAGS])
+AC_SUBST([LDFLAGS])
 
 AC_PROG_AR
 

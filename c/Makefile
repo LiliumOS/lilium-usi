@@ -10,7 +10,7 @@ TARGETS :=
 
 output_name := c
 
-LIBS := -lusi -lusi-support
+LIBS := -Wl,--as-needed -lusi-base -lusi-thread -lusi-io -lusi-process -lusi-debug -lusi-kmgmt -Wl,--no-as-needed -lusi-support
 
 ifeq ($(build_shared),yes)
 	TARGETS += lib$(output_name).so
