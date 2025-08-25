@@ -28,17 +28,23 @@ int atexit(void (*__func)(void));
 int at_quick_exit(void (*__func)(void));
 #endif
 
-void* malloc(size_t __size);
-void free(void* __mem);
+void *malloc(size_t __size);
+void free(void *__mem);
 
 #include <bits/div.h>
 
-__LILIUM_USI_DEF_DIV(,int);
-__LILIUM_USI_DEF_DIV(l,long);
+__LILIUM_USI_DEF_DIV(, int);
+__LILIUM_USI_DEF_DIV(l, long);
 
 #if __USE_C99 || __USE_CXX11
 __LILIUM_USI_DEF_DIV(ll, long long);
 #endif
+
+#define RAND_MAX __INT_MAX__
+
+int rand(void);
+
+void srand(unsigned int);
 
 __LILIUM_USI_END_CDECLS
 

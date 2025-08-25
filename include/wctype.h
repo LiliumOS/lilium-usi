@@ -5,7 +5,7 @@
 #include <lilium-sci/types/int.h>
 
 #ifndef __USE_CXX98
-typedef __i32 wchar_t;
+typedef __u32 wchar_t;
 #endif
 typedef __i32 wint_t;
 
